@@ -4,20 +4,26 @@ public class Contador {
     public static void main(String[] args) {
         
         Scanner parametros = new Scanner(System.in);
-        System.out.println("Digite o 1º parâmetro");
-        Integer parametroUm = parametros.nextInt();
-        System.out.println("Digite o 2º parâmetro");
-        Integer parametroDois = parametros.nextInt();
-        
         try {
+            
+            System.out.println("Digite o 1º parâmetro");
+            Integer parametroUm = parametros.nextInt();
+            System.out.println("Digite o 2º parâmetro");
+            Integer parametroDois = parametros.nextInt();
+                
             validarParametros(parametroUm, parametroDois);
             impirmirContagem(parametroUm, parametroDois);
-            
-            parametros.close();
+                        
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }        
+        } catch (ParametrosInvalidosException e) {
+            System.out.println(e);
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Devem ser informados apenas números inteiros.");
+        } catch (Exception e){
+            System.out.println(e);
+        } finally{
+            parametros.close();
+        }
     }
 
     private static void validarParametros(Integer parametroUm, Integer parametroDois) throws ParametrosInvalidosException{
